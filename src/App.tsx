@@ -9,48 +9,56 @@ interface lap {
 }
 
 function App() {
+  const [isMount, setIsMount] = useState(false)
+
   const [ms, setMs] = useState(0)
-  const [seconds, setSeconds] = useState(58)
-  const [minutes, setMinutes] = useState(59)
+  const [seconds, setSeconds] = useState(0)
+  const [minutes, setMinutes] = useState(0)
   const [hours, setHours] = useState(0)
-  const [activeTimer, setActiveTimer] = useState(true)
   const [laps, setLaps] = useState<lap[]>([])
 
-  useEffect(() => {
-    if (activeTimer) {
-      window.setTimeout(() => setMs(ms + 1), 10)
-      if (ms == 100) {
-        setSeconds((s) => s + 1)
-        setMs(0)
-      }
-      if (seconds === 60) {
-        setMinutes((m) => m + Math.floor(seconds / 60))
-        setSeconds(0)
-      }
-      if (minutes === 60) {
-        setHours((h) => h + Math.floor(minutes / 60))
-        setMinutes(0)
-      }
-    }
-  }, [ms, activeTimer])
+  const [isInterval, setIsInterval] = useState(0)
 
-  const stopStartTimer = () => {
-    if (activeTimer) setActiveTimer(false)
-    else setActiveTimer(true)
+  const callInterval = () => {
+    setIsInterval(window.setInterval(() => setMs((ms) => ms + 1), 10))
   }
 
-  const reset = () => {
+  useEffect(() => {
+    if (isMount) {
+      callInterval()
+    }
+    setIsMount(true)
+  }, [isMount])
+
+  useEffect(() => {
+    if (ms === 100) {
+      setSeconds(seconds + 1)
+      setMs(0)
+    }
+    if (seconds === 60) {
+      setMinutes(minutes + 1)
+      setSeconds(0)
+    }
+    if (minutes === 60) {
+      setHours(hours + 1)
+      setMinutes(0)
+    }
+  }, [ms])
+
+  const stopStartTimer = () => {
+    if (isInterval) {
+      clearInterval(isInterval)
+      setIsInterval(0)
+    } else callInterval()
+  }
+
+  const restart = () => {
     setMs(0)
     setSeconds(0)
     setMinutes(0)
     setHours(0)
-  }
-
-  const clearLaps = () => setLaps([])
-
-  const restart = () => {
-    reset()
-    setActiveTimer(true)
+    clearInterval(isInterval)
+    setIsInterval(0)
   }
 
   const addLap = () => {
@@ -68,13 +76,13 @@ function App() {
     <div>
       <div className="actions">
         <button className="btn" onClick={stopStartTimer}>
-          {activeTimer ? 'stop' : 'start'}
+          {isInterval ? 'stop' : 'start'}
         </button>
         <button className="btn" onClick={addLap}>
           lap
         </button>
 
-        <button className="btn" onClick={clearLaps}>
+        <button className="btn" onClick={() => setLaps([])}>
           clear laps
         </button>
         <button className="btn" onClick={restart}>
