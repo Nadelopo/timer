@@ -3,7 +3,7 @@ import { Stopwatch } from './components/Stopwatch'
 import { Timer } from './components/Timer'
 
 const App: React.FC = () => {
-  const [isComponent, setIsComponent] = useState(true)
+  const [isComponent, setIsComponent] = useState(false)
 
   return (
     <div>

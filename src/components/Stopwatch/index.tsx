@@ -90,7 +90,7 @@ export const Stopwatch: React.FC = () => {
           restart
         </button>
       </div>
-      <div className="stopwatch">
+      <div className="score">
         <div className="numbers">
           {hours < 10 && <div className="number">0</div>}
           <div className="number">{hours}</div>
@@ -106,7 +106,7 @@ export const Stopwatch: React.FC = () => {
           <div className="number">{seconds}</div>
         </div>
         <div>:</div>
-        <div className="numbers">
+        <div className="numbers numbers__ms">
           {ms < 10 && <div className="number">0</div>}
           <div className="number">{ms}</div>
         </div>

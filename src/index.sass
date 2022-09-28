@@ -23,6 +23,30 @@ body
   text-transform: uppercase
   font-weight: 700
 
+.score
+  font-size: 150px
+  display: flex
+  justify-content: center
+  gap: 20px
+  cursor: default
+  line-height: 150px
+  @media (max-width: 768px)
+    font-size: 60px
+    gap: 4px
+  .numbers
+    width: 140px
+    display: flex
+    justify-content: center
+    @media (max-width: 768px)
+      width: 60px
+    &__ms
+      justify-content: start
+    .number
+      min-width: 70px
+      text-align: center
+      @media (max-width: 768px)
+        min-width: 30px
+
 .btn
   font-size: 30px
   background: var(--back-main)
