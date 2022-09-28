@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { Score } from '../Score'
 import './Timer.sass'
 
 export const Timer = () => {
@@ -66,28 +67,7 @@ export const Timer = () => {
           />
         </div>
       </div>
-
-      <div className="score">
-        <div className="numbers">
-          {hours < 10 && <div className="number">0</div>}
-          <div className="number">{hours}</div>
-        </div>
-        <div>:</div>
-        <div className="numbers">
-          {minutes < 10 && <div className="number">0</div>}
-          <div className="number">{minutes}</div>
-        </div>
-        <div>:</div>
-        <div className="numbers">
-          {seconds < 10 && <div className="number">0</div>}
-          <div className="number">{seconds}</div>
-        </div>
-        <div>:</div>
-        <div className="numbers numbers__ms">
-          {ms < 10 && <div className="number">0</div>}
-          <div className="number">{ms}</div>
-        </div>
-      </div>
+      <Score hours={hours} minutes={minutes} seconds={seconds} ms={ms} />
     </div>
   )
 }
