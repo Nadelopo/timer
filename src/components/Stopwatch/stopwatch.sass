@@ -1,0 +1,39 @@
+.stopwatch
+  font-size: 150px
+  display: flex
+  justify-content: center
+  gap: 20px
+  cursor: default
+  @media (max-width: 768px)
+    font-size: 60px
+    gap: 4px
+  .numbers
+    width: 140px
+    display: flex
+    @media (max-width: 768px)
+      width: 60px
+    .number
+      min-width: 70px
+      text-align: center
+      @media (max-width: 768px)
+        min-width: 30px
+
+.actions
+  display: grid
+  grid-template-columns: repeat(4, auto)
+  gap: 10px
+  max-width: 600px
+  margin: 100px auto 0 auto
+  @media (max-width: 768px)
+    grid-template-rows: repeat(2, auto)
+    grid-template-columns: repeat(2, auto)
+
+.laps
+  margin-top: 50px
+  .lap
+    display: flex
+    justify-content: center
+    gap: 2px
+    cursor: default
+    font-size: 24px
+    margin-bottom: 10px
