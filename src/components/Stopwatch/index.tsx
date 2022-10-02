@@ -22,7 +22,7 @@ export const Stopwatch: React.FC = () => {
   const [isInterval, setIsInterval] = useState(0)
 
   const callInterval = () => {
-    setIsInterval(window.setInterval(() => setMs((ms) => ms + 1), 10))
+    setIsInterval(window.setInterval(() => setMs((ms) => ms + 1), 1000))
   }
 
   useEffect(() => {

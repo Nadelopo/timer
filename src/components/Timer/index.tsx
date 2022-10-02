@@ -1,12 +1,19 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Score } from '../Score'
 import './Timer.sass'
 
 export const Timer = () => {
-  const [ms, setMs] = useState(0)
-  const [seconds, setSeconds] = useState(0)
-  const [minutes, setMinutes] = useState(0)
+  const [isMount, setIsMount] = useState(false)
+  const [isInterval, setIsInterval] = useState(0)
+
+  const [ms, setMs] = useState(78)
+  const [seconds, setSeconds] = useState(1)
+  const [minutes, setMinutes] = useState(1)
   const [hours, setHours] = useState(0)
+
+  const callTimer = () => {
+    setIsInterval(window.setInterval(() => setMs((ms) => ms - 1), 10))
+  }
 
   const setScore = (value: string, type: string) => {
     const Nvalue = Number(value.slice(0, 2))
@@ -26,6 +33,38 @@ export const Timer = () => {
         break
     }
   }
+
+  useEffect(() => {
+    if (isMount) {
+      callTimer()
+    }
+    setIsMount(true)
+  }, [isMount])
+
+  useEffect(() => {
+    if (!ms && !seconds && !minutes && !hours) {
+      clearInterval(isInterval)
+    } else {
+      if (ms === 0) {
+        setMs(99)
+        setSeconds(seconds - 1)
+      }
+
+      if (minutes) {
+        if (seconds === 0) {
+          setSeconds(60)
+          setMinutes(minutes - 1)
+        }
+      }
+
+      if (hours) {
+        if (minutes === 0) {
+          setMinutes(60)
+          setHours(hours - 1)
+        }
+      }
+    }
+  }, [ms])
 
   return (
     <div>
