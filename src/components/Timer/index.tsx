@@ -6,10 +6,10 @@ export const Timer = () => {
   const [isInterval, setIsInterval] = useState(0)
   const [showInputs, setShowInputs] = useState(true)
 
-  const [ms, setMs] = useState(78)
-  const [seconds, setSeconds] = useState(0)
+  const [ms, setMs] = useState(0)
+  const [seconds, setSeconds] = useState(3)
   const [minutes, setMinutes] = useState(1)
-  const [hours, setHours] = useState(0)
+  const [hours, setHours] = useState(1)
 
   const callTimer = () => {
     setIsInterval(window.setInterval(() => setMs((ms) => ms - 1), 10))
@@ -39,21 +39,21 @@ export const Timer = () => {
       setShowInputs(true)
       setIsInterval(0)
     } else {
-      if (ms === 0 || ms === -1) {
+      if (ms === -1) {
         setMs(99)
         setSeconds(seconds - 1)
       }
 
-      if (minutes) {
-        if (seconds === 0) {
-          setSeconds(60)
+      if (minutes !== -1) {
+        if (seconds === -1) {
+          setSeconds(59)
           setMinutes(minutes - 1)
         }
       }
 
       if (hours) {
-        if (minutes === 0) {
-          setMinutes(60)
+        if (minutes === -1) {
+          setMinutes(59)
           setHours(hours - 1)
         }
       }
