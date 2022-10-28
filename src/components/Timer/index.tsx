@@ -59,7 +59,7 @@ export const Timer = () => {
       }
       setShowInputs(false)
     }
-  }, [ms])
+  }, [ms, showInputs])
 
   const stopStartStopwatch = () => {
     if (isInterval) {
