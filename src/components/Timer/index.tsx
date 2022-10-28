@@ -59,7 +59,7 @@ export const Timer = () => {
       }
       setShowInputs(false)
     }
-  }, [ms, showInputs])
+  }, [ms])
 
   const stopStartStopwatch = () => {
     if (isInterval) {
@@ -75,6 +75,7 @@ export const Timer = () => {
     setHours(0)
     clearInterval(isInterval)
     setIsInterval(0)
+    setShowInputs(true)
   }
 
   return (
